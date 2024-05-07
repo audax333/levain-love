@@ -32,7 +32,7 @@ export default function Calc(props: Readonly<CalcProps>) {
           description={vm.recipe.description}
           updateDescription={vm.updateDescription}
       />
-      <RecipePropertiesDisplay properties={vm.properties} />
+      <RecipePropertiesDisplay properties={vm.properties} onScale={vm.scaleByFactor} />
       <Accordion>
           <AccordionSummary>Export, Import, Loading</AccordionSummary>
           <AccordionDetails>

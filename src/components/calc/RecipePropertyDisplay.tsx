@@ -1,42 +1,51 @@
 import * as React from "react";
-import { RecipeProperties } from "@/data/recipe";
-import { Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
+import {RecipeProperties} from "@/data/recipe";
+import {IconButton, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip} from "@mui/material";
+import {Scale} from "@mui/icons-material";
 
 interface RecipePropertiesDisplayProps {
-  properties: RecipeProperties;
+    properties: RecipeProperties,
+    onScale(factor: number): void
 }
-export default function RecipePropertiesDisplay(props: RecipePropertiesDisplayProps) {
-  const { properties } = props;
-  return (
-    <TableContainer data-testid="recipe-properties">
-      <Table aria-label="recipe properties table">
-        <TableBody>
-          <TableRow>
-            <TableCell>Hydration</TableCell>
-            <TableCell>{properties.hydration.toFixed(0)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Total weight</TableCell>
-            <TableCell>{properties.weight.toFixed(0)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Weight per item</TableCell>
-            <TableCell>{properties.weightPerBread.toFixed(0)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Flour weight</TableCell>
-            <TableCell>{properties.flourWeight.toFixed(0)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Fluid weight</TableCell>
-            <TableCell>{properties.fluidWeight.toFixed(0)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Salt weight</TableCell>
-            <TableCell>{properties.saltWeight.toFixed(0)}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+
+export default function RecipePropertiesDisplay(props: Readonly<RecipePropertiesDisplayProps>) {
+    const {properties} = props;
+    return (
+        <TableContainer data-testid="recipe-properties">
+            <Table aria-label="recipe properties table">
+                <TableBody>
+                    <TableRow>
+                        <TableCell>Hydration</TableCell>
+                        <TableCell>{properties.hydration.toFixed(0)}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Total weight</TableCell>
+                        <TableCell>{properties.weight.toFixed(0)}</TableCell>
+                        <TableCell>
+                        <Tooltip title="Scale the recipe to this quantity">
+                            <IconButton aria-label="scale recipe" onClick={() => {props.onScale(2)}}>
+                                <Scale/>
+                            </IconButton>
+                        </Tooltip></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Weight per item</TableCell>
+                        <TableCell>{properties.weightPerBread.toFixed(0)}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Flour weight</TableCell>
+                        <TableCell>{properties.flourWeight.toFixed(0)}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Fluid weight</TableCell>
+                        <TableCell>{properties.fluidWeight.toFixed(0)}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Salt weight</TableCell>
+                        <TableCell>{properties.saltWeight.toFixed(0)}</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
 }
